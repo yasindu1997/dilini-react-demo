@@ -1,8 +1,14 @@
 import './Home.css'
 import Navbar from '../../components/NavBar/Navbar';
 import './Home.css'
+import { useState } from 'react';
 
 function Home() {
+
+    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    const [salary, setSalary] = useState(0);
+
     return (
         <div className='container-fluid'>
             <div className='row'>
@@ -28,7 +34,7 @@ function Home() {
                 <div className='col-4 mt-4'>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" value={email} onChange={(e) => { setEmail(e.value) }} />
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Name</label>
