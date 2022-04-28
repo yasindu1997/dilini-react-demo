@@ -1,9 +1,9 @@
 import './SmartButton.css'
 
-function SmartButton() {
+function SmartButton(props) {
     return (
         <div>
-            <button className="btn">Click Me</button>
+            <button className="btn" style={{backgroundColor:props.color}}>{props.name}</button>
         </div>
     )
 }
