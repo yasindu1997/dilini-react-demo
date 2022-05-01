@@ -35,18 +35,18 @@ function Home() {
         fetch('https://jsonplaceholder.typicode.com/posts/1', {
             method: 'PUT',
             body: JSON.stringify({
-              id: 1,
-              title: title,
-              body: body,
-              userId: userId,
+                id: 1,
+                title: title,
+                body: body,
+                userId: userId,
             }),
             headers: {
-              'Content-type': 'application/json; charset=UTF-8',
+                'Content-type': 'application/json; charset=UTF-8',
             },
-          })
+        })
             .then((response) => response.json())
-            .then((json) => {alert('Data Updated !')})
-            .catch((err)=>{alert('Update Failed !')});
+            .then((json) => { alert('Data Updated !') })
+            .catch((err) => { alert('Update Failed !') });
     }
 
     const clear = () => {
