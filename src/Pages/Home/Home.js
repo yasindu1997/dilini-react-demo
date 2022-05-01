@@ -31,6 +31,24 @@ function Home() {
             });
     }
 
+    const updatePost = () => {
+        fetch('https://jsonplaceholder.typicode.com/posts/1', {
+            method: 'PUT',
+            body: JSON.stringify({
+              id: 1,
+              title: title,
+              body: body,
+              userId: userId,
+            }),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+          })
+            .then((response) => response.json())
+            .then((json) => {alert('Data Updated !')})
+            .catch((err)=>{alert('Update Failed !')});
+    }
+
     const clear = () => {
         setTile('');
         setBody('');
@@ -71,7 +89,8 @@ function Home() {
                         <label for="exampleFormControlInput1" class="form-label">User Id</label>
                         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="1" value={userId} onChange={(e) => { setUserId(e.value) }} />
                     </div>
-                    <button type="button" class="btn btn-success" onClick={addPost}>Save Patient</button>
+                    <button type="button" class="btn btn-success me-4" onClick={addPost}>Save Patient</button>
+                    <button type="button" class="btn btn-warning" onClick={updatePost}>Update</button>
                 </div>
                 <div className='col-8 mt-4'>
                     <table class="table">
