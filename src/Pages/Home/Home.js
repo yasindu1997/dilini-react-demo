@@ -1,13 +1,19 @@
 import './Home.css'
 import Navbar from '../../components/NavBar/Navbar';
 import './Home.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function Home() {
 
     const [title, setTile] = useState('');
     const [body, setBody] = useState('');
     const [userId, setUserId] = useState('');
+    const [data, setData] = useState([]);
+
+    //on compoenent load(render),state change
+    useEffect(() => {
+        getData();
+    }, [])
 
     const addPost = () => {
         fetch('https://jsonplaceholder.typicode.com/posts', {
@@ -45,8 +51,20 @@ function Home() {
             },
         })
             .then((response) => response.json())
-            .then((json) => { alert('Data Updated !') })
+            .then((json) => { 
+                alert('Data Updated !');
+                getData();
+             })
             .catch((err) => { alert('Update Failed !') });
+    }
+
+    const getData = () => {
+        fetch('https://jsonplaceholder.typicode.com/users/1/todos')
+            .then((response) => response.json())
+            .then((json) => {
+                console.log(json);
+                setData(json);
+            });
     }
 
     const clear = () => {
@@ -90,40 +108,29 @@ function Home() {
                         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="1" value={userId} onChange={(e) => { setUserId(e.value) }} />
                     </div>
                     <button type="button" class="btn btn-success me-4" onClick={addPost}>Save Patient</button>
-                    <button type="button" class="btn btn-warning" onClick={updatePost}>Update</button>
+                    <button type="button" class="btn btn-warning me-4" onClick={updatePost}>Update</button>
                 </div>
                 <div className='col-8 mt-4'>
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Address</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Salary</th>
+                                <th scope="col">userId</th>
+                                <th scope="col">id</th>
+                                <th scope="col">title</th>
+                                <th scope="col">completed</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>mdo</td>
-                                <td>mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>fat</td>
-                                <td>mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>twitter</td>
-                                <td>mdo</td>
-                            </tr>
+                            {data.map(todo => {
+                                return (
+                                    <tr>
+                                        <th scope="row">{todo.userId}</th>
+                                        <td>{todo.id}</td>
+                                        <td>{todo.title}</td>
+                                        <td>{todo.completed}</td>
+                                    </tr>
+                                )
+                            })}
                         </tbody>
                     </table>
                 </div>
