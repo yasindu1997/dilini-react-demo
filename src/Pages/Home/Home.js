@@ -5,9 +5,37 @@ import { useState } from 'react';
 
 function Home() {
 
-    const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
-    const [salary, setSalary] = useState(0);
+    const [title, setTile] = useState('');
+    const [body, setBody] = useState('');
+    const [userId, setUserId] = useState('');
+
+    const addPost = () => {
+        fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: 'POST',
+            body: JSON.stringify({
+                title: title,
+                body: body,
+                userId: userId,
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                alert("Data saved !");
+                clear();
+            })
+            .catch((err) => {
+                alert("Save Failed !")
+            });
+    }
+
+    const clear = () => {
+        setTile('');
+        setBody('');
+        setUserId('');
+    }
 
     return (
         <div className='container-fluid'>
@@ -33,24 +61,17 @@ function Home() {
             <div className='row'>
                 <div className='col-4 mt-4'>
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" value={email} onChange={(e) => { setEmail(e.value) }} />
+                        <label for="exampleFormControlInput1" class="form-label">Tile</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Hello Java" value={title} onChange={(e) => { setTile(e.value) }} />
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Name</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="yasindu sathsara" />
+                        <label for="exampleFormControlInput1" class="form-label">Body</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter your body" value={body} onChange={(e) => { setBody(e.value) }} />
                     </div> <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Adress</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="216, aluthgama" />
-                    </div> <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Tel</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="0775067538" />
+                        <label for="exampleFormControlInput1" class="form-label">User Id</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="1" value={userId} onChange={(e) => { setUserId(e.value) }} />
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Salary</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="100000.00" />
-                    </div>
-                    <button type="button" class="btn btn-success">Save Patient</button>
+                    <button type="button" class="btn btn-success" onClick={addPost}>Save Patient</button>
                 </div>
                 <div className='col-8 mt-4'>
                     <table class="table">
