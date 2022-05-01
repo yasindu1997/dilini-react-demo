@@ -76,25 +76,6 @@ function Home() {
     return (
         <div className='container-fluid'>
             <div className='row'>
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#">Suvodya Medical</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                            <div class="navbar-nav">
-                                <a class="nav-link " aria-current="page" href="#">Home</a>
-                                <a class="nav-link" href="#">Features</a>
-                                <a class="nav-link active" href="#">Pricing</a>
-                                <a class="nav-link" href='#'>About</a>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-
-            <div className='row'>
                 <div className='col-4 mt-4'>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Tile</label>
